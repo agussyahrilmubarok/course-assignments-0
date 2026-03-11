@@ -1,6 +1,22 @@
 {
   "folders": [
     {
+      "name": "app",
+      "path": "./app",
+    },
+    {
+      "name": "basic-logging",
+      "path": "./basic-logging",
+    },
+    {
+      "name": "basic-metric",
+      "path": "./basic-metric",
+    },
+    {
+      "name": "basic-trace",
+      "path": "./basic-trace",
+    },
+    {
       "name": "project",
       "path": ".",
     },

@@ -1,0 +1,9 @@
+Course (Aggregate Root)
+   └── Batch
+         └── Booking
+
+Problem 1:
+    Seat overselling problem
+    Race condition when booking
+    Seat locking strategy
+    Payment timeout
