@@ -13,6 +13,14 @@
       "path": "./basic-logging-01-zap-file",
     },
     {
+      "name": "basic-logging-02-fluentbit-loki-grafana",
+      "path": "./basic-logging-02-fluentbit-loki-grafana",
+    },
+    {
+      "name": "basic-logging-03-nginx-fluentbit-loki-grafana",
+      "path": "./basic-logging-03-nginx-fluentbit-loki-grafana",
+    },
+    {
       "name": "project",
       "path": ".",
     },

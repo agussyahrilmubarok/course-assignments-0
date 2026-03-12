@@ -1,0 +1,1 @@
+- [ ] set logger in app and postgres send to centralized logging.
