@@ -2,7 +2,7 @@ dev:
 	go run cmd/course/main.go
 
 build:
-	go build cmd/course/main.go -o bin/course
+	go build -o bin/course cmd/course/main.go
 
 compose/postgres/up:
 	docker compose -f docker-compose-postgres.yaml up -d --build

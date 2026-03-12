@@ -49,6 +49,7 @@ func Migrate(db *gorm.DB) error {
 	err := db.AutoMigrate(
 		&entity.Course{},
 		&entity.Batch{},
+		&entity.Booking{},
 	)
 
 	if err != nil {

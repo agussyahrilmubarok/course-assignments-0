@@ -83,7 +83,6 @@ func (h *Handler) CreateBooking(c *gin.Context) {
 			"status":        b.Status,
 			"customer_name": b.CustomerName,
 			"batch_code":    b.Batch.Code,
-			"expired_at":    b.ExpiredAt,
 		},
 	})
 }

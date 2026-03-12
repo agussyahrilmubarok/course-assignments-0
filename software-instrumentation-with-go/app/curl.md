@@ -3,14 +3,14 @@
 ## SEED
 
 ```bash
-curl -X GET http://localhost:8080/api/v1/course/seed \
+curl -X GET http://localhost:8080/api/v1/catalog/seed \
   -H "Content-Type: application/json" 
 ```
 
 ## CLEAN
 
 ```bash
-curl -X GET http://localhost:8080/api/v1/course/clean \
+curl -X GET http://localhost:8080/api/v1/catalog/clean \
   -H "Content-Type: application/json" 
 ```
 
