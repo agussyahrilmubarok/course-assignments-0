@@ -9,12 +9,8 @@
       "path": "./basic-logging",
     },
     {
-      "name": "basic-metric",
-      "path": "./basic-metric",
-    },
-    {
-      "name": "basic-trace",
-      "path": "./basic-trace",
+      "name": "basic-logging-01-zap-file",
+      "path": "./basic-logging-01-zap-file",
     },
     {
       "name": "project",
