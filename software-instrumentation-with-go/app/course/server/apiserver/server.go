@@ -11,13 +11,16 @@ import (
 	"net/http"
 	"time"
 
+	ginzap "github.com/gin-contrib/zap"
 	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
 	"gorm.io/gorm"
 )
 
 type Option struct {
 	Cfg *config.Config
 	DB  *gorm.DB
+	Log *zap.Logger
 }
 
 type Server struct {
@@ -34,6 +37,9 @@ type Server struct {
 }
 
 func New(opts *Option) *Server {
+	log := opts.Log
+	log.Info("initializing server")
+
 	s := &Server{
 		option: opts,
 	}
@@ -46,30 +52,55 @@ func New(opts *Option) *Server {
 	s.bookingService = booking.NewService(s.bookingStore, s.catalogStore)
 	s.bookingHandler = bookingV1.NewHandler(s.bookingService)
 
+	log.Info("server initialized")
 	return s
 }
 
 func (s *Server) Run(ctx context.Context) error {
+	log := s.option.Log
+
 	s.http = s.newHTTPServer()
+	log.Info("http server starting",
+		zap.String("addr", s.http.Addr),
+	)
 
 	go func() {
 		if err := s.http.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			fmt.Println("server error:", err)
+			log.Error("server error",
+				zap.Error(err),
+			)
 		}
 	}()
 
 	<-ctx.Done()
+
+	log.Info("shutdown signal received")
 
 	gracefulShutdownPeriod := 30 * time.Second
 
 	shutdownCtx, cancel := context.WithTimeout(context.Background(), gracefulShutdownPeriod)
 	defer cancel()
 
-	return s.http.Shutdown(shutdownCtx)
+	if err := s.http.Shutdown(shutdownCtx); err != nil {
+		log.Error("graceful shutdown failed",
+			zap.Error(err),
+		)
+		return err
+	}
+
+	log.Info("server stopped gracefully")
+
+	return nil
 }
 
 func (s *Server) newHTTPServer() *http.Server {
+	log := s.option.Log
+
+	gin.SetMode(gin.ReleaseMode)
+
 	router := gin.Default()
+	router.Use(ginzap.Ginzap(log, time.RFC3339, true))
+	router.Use(ginzap.RecoveryWithZap(log, true))
 
 	apiV1 := router.Group("/api/v1")
 

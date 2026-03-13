@@ -1,0 +1,12 @@
+apiVersion: 1
+
+providers:
+  - name: 'Course Service Dashboards'
+    orgId: 1
+    folder: 'course-service'
+    type: file
+    disableDeletion: false
+    editable: true
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards/course-service

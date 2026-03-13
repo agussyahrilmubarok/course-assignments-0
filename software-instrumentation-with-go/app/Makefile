@@ -12,10 +12,10 @@ compose/postgres/down:
 	docker volume prune -a
 
 compose/stage/up:
-	docker compose -f docker-compose-postgres.yaml up -d --build
+	docker compose -f docker-compose-stage.yaml up -d --build
 
 compose/stage/down:
-	docker compose -f docker-compose-postgres.yaml down
+	docker compose -f docker-compose-stage.yaml down
 	docker volume prune -a
 
 compose/up:

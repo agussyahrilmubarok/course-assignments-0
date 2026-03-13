@@ -3,10 +3,12 @@ package v1
 import (
 	"app/course/catalog"
 	"app/internal/database/entity"
+	"app/internal/logger"
 	"app/internal/util"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
 	"gorm.io/gorm"
 )
 
@@ -27,9 +29,11 @@ func (h *Handler) Register(r *gin.RouterGroup) {
 }
 
 func (h *Handler) SeedData(c *gin.Context) {
-	ctx := c.Request.Context()
-
+	log := logger.Log
+	ctx := logger.WithCtx(c.Request.Context(), log)
 	now := util.GetJakartaTimeNow()
+
+	log.Info("seed catalog started")
 
 	courses := []entity.Course{
 		{
@@ -76,11 +80,18 @@ func (h *Handler) SeedData(c *gin.Context) {
 			FirstOrCreate(&course).
 			Error
 		if err != nil {
+			log.Error("failed seed course",
+				zap.String("code", course.Code),
+				zap.Error(err),
+			)
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"message": "Failed to seed courses",
 			})
 			return
 		}
+		log.Info("course seeded",
+			zap.String("code", course.Code),
+		)
 	}
 
 	startOfDay := util.GetJakartaStartOfDay(now)
@@ -145,12 +156,22 @@ func (h *Handler) SeedData(c *gin.Context) {
 			FirstOrCreate(&batch).
 			Error
 		if err != nil {
+			log.Error("failed seed batch",
+				zap.String("code", batch.Code),
+				zap.Error(err),
+			)
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"message": "Failed to seed batches",
 			})
 			return
 		}
+		log.Info("batch seeded",
+			zap.String("code", batch.Code),
+			zap.String("course_id", batch.CourseID),
+		)
 	}
+
+	log.Info("seed catalog finished")
 
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Seed courses and batches success",
@@ -158,11 +179,16 @@ func (h *Handler) SeedData(c *gin.Context) {
 }
 
 func (h *Handler) CleanData(c *gin.Context) {
-	ctx := c.Request.Context()
+	log := logger.Log
+	ctx := logger.WithCtx(c.Request.Context(), log)
+
+	log.Info("clean catalog started")
 
 	db := h.service.Store.DB.WithContext(ctx)
-
 	if err := db.Session(&gorm.Session{AllowGlobalUpdate: true}).Delete(&entity.Batch{}).Error; err != nil {
+		log.Error("delete batch failed",
+			zap.Error(err),
+		)
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "failed delete batches",
 			"error":   err.Error(),
@@ -171,12 +197,17 @@ func (h *Handler) CleanData(c *gin.Context) {
 	}
 
 	if err := db.Session(&gorm.Session{AllowGlobalUpdate: true}).Delete(&entity.Course{}).Error; err != nil {
+		log.Error("delete course failed",
+			zap.Error(err),
+		)
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "failed delete courses",
 			"error":   err.Error(),
 		})
 		return
 	}
+
+	log.Info("clean catalog success")
 
 	c.JSON(http.StatusOK, gin.H{
 		"message": "clean success",

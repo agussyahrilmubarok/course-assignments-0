@@ -2,6 +2,7 @@ package booking
 
 import (
 	"app/course/catalog"
+	"app/internal/logger"
 	"context"
 	"fmt"
 	"math/rand"
@@ -9,6 +10,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+	"go.uber.org/zap"
 )
 
 type Service struct {
@@ -27,20 +29,38 @@ func NewService(
 }
 
 func (s *Service) CreateBooking(ctx context.Context, batchCode string, customerName string) (*Booking, error) {
+	log := logger.FromCtx(ctx)
+
+	log.Info("create booking start",
+		zap.String("batch_code", batchCode),
+		zap.String("customer_name", customerName),
+	)
+
 	if customerName == "" {
+		log.Warn("invalid customer name")
 		return nil, ErrInvalidCustomerName
 	}
 
 	batch, err := s.catalogStore.FindBatchCourseByBatchCode(ctx, batchCode)
 	if err != nil || batch == nil {
+		log.Warn("batch not found",
+			zap.String("batch_code", batchCode),
+			zap.Error(err),
+		)
 		return nil, catalog.ErrBatchNotFound
 	}
 
 	if batch.IsFull() {
+		log.Warn("batch full",
+			zap.String("batch_code", batchCode),
+		)
 		return nil, catalog.ErrBatchFull
 	}
 
 	if !batch.IsPublished() {
+		log.Warn("batch not open",
+			zap.String("batch_code", batchCode),
+		)
 		return nil, catalog.ErrBatchNotOpen
 	}
 
@@ -59,8 +79,20 @@ func (s *Service) CreateBooking(ctx context.Context, batchCode string, customerN
 	}
 
 	if err := s.bookingStore.Save(ctx, b); err != nil {
+		log.Error("failed save booking",
+			zap.String("batch_code", batchCode),
+			zap.String("booking_code", b.Code),
+			zap.Error(err),
+		)
 		return nil, err
 	}
+
+	log.Info("booking created",
+		zap.String("booking_id", b.ID),
+		zap.String("booking_code", b.Code),
+		zap.String("batch_code", batchCode),
+		zap.String("customer_name", customerName),
+	)
 
 	return b, nil
 }
