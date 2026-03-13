@@ -29,8 +29,8 @@ func (h *Handler) Register(r *gin.RouterGroup) {
 }
 
 func (h *Handler) SeedData(c *gin.Context) {
-	log := logger.Log
-	ctx := logger.WithCtx(c.Request.Context(), log)
+	ctx := c.Request.Context()
+	log := logger.FromCtx(ctx)
 	now := util.GetJakartaTimeNow()
 
 	log.Info("seed catalog started")
@@ -179,8 +179,8 @@ func (h *Handler) SeedData(c *gin.Context) {
 }
 
 func (h *Handler) CleanData(c *gin.Context) {
-	log := logger.Log
-	ctx := logger.WithCtx(c.Request.Context(), log)
+	ctx := c.Request.Context()
+	log := logger.FromCtx(ctx)
 
 	log.Info("clean catalog started")
 

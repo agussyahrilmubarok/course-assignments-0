@@ -6,6 +6,7 @@ import (
 	bookingV1 "app/course/server/booking/v1"
 	catalogV1 "app/course/server/catalog/v1"
 	"app/internal/config"
+	"app/internal/logger"
 	"context"
 	"fmt"
 	"net/http"
@@ -13,6 +14,7 @@ import (
 
 	ginzap "github.com/gin-contrib/zap"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
 )
@@ -99,7 +101,7 @@ func (s *Server) newHTTPServer() *http.Server {
 	gin.SetMode(gin.ReleaseMode)
 
 	router := gin.Default()
-	router.Use(ginzap.Ginzap(log, time.RFC3339, true))
+	router.Use(s.requestIDMiddleware())
 	router.Use(ginzap.RecoveryWithZap(log, true))
 
 	apiV1 := router.Group("/api/v1")
@@ -121,4 +123,38 @@ func (s *Server) healthz(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"message": "ok",
 	})
+}
+
+func (s *Server) requestIDMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		start := time.Now()
+
+		requestID := c.Request.Header.Get("X-Request-ID")
+		if requestID == "" {
+			requestID = uuid.NewString()
+		}
+
+		c.Writer.Header().Set("X-Request-ID", requestID)
+
+		reqLogger := logger.Log.With(
+			zap.String("request_id", requestID),
+		)
+
+		ctx := logger.WithCtx(c.Request.Context(), reqLogger)
+
+		c.Request = c.Request.WithContext(ctx)
+
+		c.Next()
+
+		duration := time.Since(start)
+		status := c.Writer.Status()
+		reqLogger.Info("http request",
+			zap.String("method", c.Request.Method),
+			zap.String("path", c.Request.URL.Path),
+			zap.String("ip", c.ClientIP()),
+			zap.String("user_agent", c.Request.UserAgent()),
+			zap.Int("status", status),
+			zap.Duration("latency", duration),
+		)
+	}
 }

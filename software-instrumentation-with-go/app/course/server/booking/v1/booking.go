@@ -27,8 +27,8 @@ func (h *Handler) Register(r *gin.RouterGroup) {
 
 func (h *Handler) CreateBooking(c *gin.Context) {
 	var req CreateBookingRequest
-	log := logger.Log
-	ctx := logger.WithCtx(c.Request.Context(), log)
+	ctx := c.Request.Context()
+	log := logger.FromCtx(ctx)
 
 	log.Info("create booking request received")
 
