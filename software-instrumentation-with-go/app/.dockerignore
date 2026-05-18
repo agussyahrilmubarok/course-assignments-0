@@ -1,0 +1,47 @@
+# git
+.git
+.gitignore
+
+# binary
+bin/
+*.exe
+*.out
+*.test
+
+# build output
+dist/
+build/
+tmp/
+
+# docker
+Dockerfile
+docker-compose.yml
+
+# logs
+*.log
+
+# env
+.env
+.env.*
+
+# editor / IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# test
+coverage.out
+*.cover
+
+# node (kalau ada frontend)
+node_modules/
+
+# docs
+*.md
+
+# Custom
+infra/

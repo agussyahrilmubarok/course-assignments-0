@@ -1,0 +1,39 @@
+{"level":"info","ts":"2026-03-13T19:05:10.040+0700","caller":"apiserver/server.go:77","msg":"shutdown signal received"}
+{"level":"info","ts":"2026-03-13T19:05:10.041+0700","caller":"apiserver/server.go:91","msg":"server stopped gracefully"}
+{"level":"info","ts":"2026-03-13T19:05:10.041+0700","caller":"course/main.go:62","msg":"server stopped gracefully"}
+{"level":"info","ts":"2026-03-13T19:06:28.471+0700","caller":"apiserver/server.go:43","msg":"initializing server"}
+{"level":"info","ts":"2026-03-13T19:06:28.471+0700","caller":"apiserver/server.go:57","msg":"server initialized"}
+{"level":"info","ts":"2026-03-13T19:06:28.472+0700","caller":"course/main.go:54","msg":"server starting"}
+{"level":"info","ts":"2026-03-13T19:06:28.472+0700","caller":"apiserver/server.go:65","msg":"http server starting","addr":":8080"}
+{"level":"info","ts":"2026-03-13T19:06:33.183+0700","caller":"v1/catalog.go:36","msg":"seed catalog started","request_id":"f8a12add-dbc8-46d9-bedf-1ccd0997f9a9","method":"GET","path":"/api/v1/catalog/seed","ip":"::1","user_agent":"curl/8.5.0"}
+{"level":"info","ts":"2026-03-13T19:06:33.186+0700","caller":"v1/catalog.go:92","msg":"course seeded","request_id":"f8a12add-dbc8-46d9-bedf-1ccd0997f9a9","method":"GET","path":"/api/v1/catalog/seed","ip":"::1","user_agent":"curl/8.5.0","code":"COURSE-GIT"}
+{"level":"info","ts":"2026-03-13T19:06:33.187+0700","caller":"v1/catalog.go:92","msg":"course seeded","request_id":"f8a12add-dbc8-46d9-bedf-1ccd0997f9a9","method":"GET","path":"/api/v1/catalog/seed","ip":"::1","user_agent":"curl/8.5.0","code":"COURSE-API"}
+{"level":"info","ts":"2026-03-13T19:06:33.188+0700","caller":"v1/catalog.go:92","msg":"course seeded","request_id":"f8a12add-dbc8-46d9-bedf-1ccd0997f9a9","method":"GET","path":"/api/v1/catalog/seed","ip":"::1","user_agent":"curl/8.5.0","code":"COURSE-DB"}
+{"level":"info","ts":"2026-03-13T19:06:33.189+0700","caller":"v1/catalog.go:92","msg":"course seeded","request_id":"f8a12add-dbc8-46d9-bedf-1ccd0997f9a9","method":"GET","path":"/api/v1/catalog/seed","ip":"::1","user_agent":"curl/8.5.0","code":"COURSE-ARCH"}
+{"level":"info","ts":"2026-03-13T19:06:33.190+0700","caller":"v1/catalog.go:92","msg":"course seeded","request_id":"f8a12add-dbc8-46d9-bedf-1ccd0997f9a9","method":"GET","path":"/api/v1/catalog/seed","ip":"::1","user_agent":"curl/8.5.0","code":"COURSE-DEVOPS"}
+{"level":"info","ts":"2026-03-13T19:06:33.191+0700","caller":"v1/catalog.go:168","msg":"batch seeded","request_id":"f8a12add-dbc8-46d9-bedf-1ccd0997f9a9","method":"GET","path":"/api/v1/catalog/seed","ip":"::1","user_agent":"curl/8.5.0","code":"GIT-BATCH-01","course_id":"COURSE-001"}
+{"level":"info","ts":"2026-03-13T19:06:33.193+0700","caller":"v1/catalog.go:168","msg":"batch seeded","request_id":"f8a12add-dbc8-46d9-bedf-1ccd0997f9a9","method":"GET","path":"/api/v1/catalog/seed","ip":"::1","user_agent":"curl/8.5.0","code":"API-BATCH-01","course_id":"COURSE-002"}
+{"level":"info","ts":"2026-03-13T19:06:33.194+0700","caller":"v1/catalog.go:168","msg":"batch seeded","request_id":"f8a12add-dbc8-46d9-bedf-1ccd0997f9a9","method":"GET","path":"/api/v1/catalog/seed","ip":"::1","user_agent":"curl/8.5.0","code":"ARCH-BATCH-01","course_id":"COURSE-004"}
+{"level":"info","ts":"2026-03-13T19:06:33.194+0700","caller":"v1/catalog.go:174","msg":"seed catalog finished","request_id":"f8a12add-dbc8-46d9-bedf-1ccd0997f9a9","method":"GET","path":"/api/v1/catalog/seed","ip":"::1","user_agent":"curl/8.5.0"}
+{"level":"info","ts":"2026-03-13T19:06:33.194+0700","caller":"apiserver/server.go:155","msg":"http request","request_id":"f8a12add-dbc8-46d9-bedf-1ccd0997f9a9","method":"GET","path":"/api/v1/catalog/seed","ip":"::1","user_agent":"curl/8.5.0","status":200,"latency":0.010964743}
+{"level":"info","ts":"2026-03-13T19:08:20.950+0700","caller":"apiserver/server.go:79","msg":"shutdown signal received"}
+{"level":"info","ts":"2026-03-13T19:08:20.951+0700","caller":"apiserver/server.go:93","msg":"server stopped gracefully"}
+{"level":"info","ts":"2026-03-13T19:08:20.951+0700","caller":"course/main.go:62","msg":"server stopped gracefully"}
+{"level":"info","ts":"2026-03-13T19:08:28.334+0700","caller":"apiserver/server.go:43","msg":"initializing server"}
+{"level":"info","ts":"2026-03-13T19:08:28.336+0700","caller":"apiserver/server.go:57","msg":"server initialized"}
+{"level":"info","ts":"2026-03-13T19:08:28.337+0700","caller":"course/main.go:54","msg":"server starting"}
+{"level":"info","ts":"2026-03-13T19:08:28.337+0700","caller":"apiserver/server.go:65","msg":"http server starting","addr":":8080"}
+{"level":"info","ts":"2026-03-13T19:08:29.670+0700","caller":"v1/catalog.go:36","msg":"seed catalog started","request_id":"ae989ffb-7e89-44fd-8933-f57615f8e5ee"}
+{"level":"info","ts":"2026-03-13T19:08:29.673+0700","caller":"v1/catalog.go:92","msg":"course seeded","request_id":"ae989ffb-7e89-44fd-8933-f57615f8e5ee","code":"COURSE-GIT"}
+{"level":"info","ts":"2026-03-13T19:08:29.674+0700","caller":"v1/catalog.go:92","msg":"course seeded","request_id":"ae989ffb-7e89-44fd-8933-f57615f8e5ee","code":"COURSE-API"}
+{"level":"info","ts":"2026-03-13T19:08:29.674+0700","caller":"v1/catalog.go:92","msg":"course seeded","request_id":"ae989ffb-7e89-44fd-8933-f57615f8e5ee","code":"COURSE-DB"}
+{"level":"info","ts":"2026-03-13T19:08:29.675+0700","caller":"v1/catalog.go:92","msg":"course seeded","request_id":"ae989ffb-7e89-44fd-8933-f57615f8e5ee","code":"COURSE-ARCH"}
+{"level":"info","ts":"2026-03-13T19:08:29.676+0700","caller":"v1/catalog.go:92","msg":"course seeded","request_id":"ae989ffb-7e89-44fd-8933-f57615f8e5ee","code":"COURSE-DEVOPS"}
+{"level":"info","ts":"2026-03-13T19:08:29.678+0700","caller":"v1/catalog.go:168","msg":"batch seeded","request_id":"ae989ffb-7e89-44fd-8933-f57615f8e5ee","code":"GIT-BATCH-01","course_id":"COURSE-001"}
+{"level":"info","ts":"2026-03-13T19:08:29.679+0700","caller":"v1/catalog.go:168","msg":"batch seeded","request_id":"ae989ffb-7e89-44fd-8933-f57615f8e5ee","code":"API-BATCH-01","course_id":"COURSE-002"}
+{"level":"info","ts":"2026-03-13T19:08:29.679+0700","caller":"v1/catalog.go:168","msg":"batch seeded","request_id":"ae989ffb-7e89-44fd-8933-f57615f8e5ee","code":"ARCH-BATCH-01","course_id":"COURSE-004"}
+{"level":"info","ts":"2026-03-13T19:08:29.680+0700","caller":"v1/catalog.go:174","msg":"seed catalog finished","request_id":"ae989ffb-7e89-44fd-8933-f57615f8e5ee"}
+{"level":"info","ts":"2026-03-13T19:08:29.680+0700","caller":"apiserver/server.go:151","msg":"http request","request_id":"ae989ffb-7e89-44fd-8933-f57615f8e5ee","method":"GET","path":"/api/v1/catalog/seed","ip":"::1","user_agent":"curl/8.5.0","status":200,"latency":0.009854511}
+{"level":"info","ts":"2026-03-13T19:10:29.174+0700","caller":"apiserver/server.go:79","msg":"shutdown signal received"}
+{"level":"info","ts":"2026-03-13T19:10:29.175+0700","caller":"apiserver/server.go:93","msg":"server stopped gracefully"}
+{"level":"info","ts":"2026-03-13T19:10:29.175+0700","caller":"course/main.go:62","msg":"server stopped gracefully"}

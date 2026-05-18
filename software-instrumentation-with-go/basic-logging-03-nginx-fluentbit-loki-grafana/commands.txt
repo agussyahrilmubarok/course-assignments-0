@@ -1,0 +1,8 @@
+docker compose up -d --build
+docker compose restart loki
+docker compose restart fluentbit
+docker compose restart grafana
+docker compose restart nginx
+
+docker compose down
+docker volume prune -a

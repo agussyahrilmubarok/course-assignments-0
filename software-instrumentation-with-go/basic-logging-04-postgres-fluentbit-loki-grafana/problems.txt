@@ -1,0 +1,5 @@
+Create a visualization in grafana dashboard to show all logs from postgres service.
+
+logQL`
+{app="postgres"} logfmt
+`

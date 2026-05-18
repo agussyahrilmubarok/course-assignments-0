@@ -1,0 +1,2 @@
+go run main.go
+k6 run k6.js
